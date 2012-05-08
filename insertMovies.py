@@ -1,5 +1,5 @@
 '''
-Created on May 6, 2012
+Created on May 7, 2012
 
 @author: njordan
 '''
@@ -18,4 +18,4 @@ userID = fbMongo.getFacebookObject(connection, accessToken, "me", "")["id"]
 
 print "Working..."
 
-fbMongo.insertFriendsMusic( connection, accessToken, userID, "musicCollection" )
+fbMongo.insertFriendsMovies( connection, accessToken, userID, "movieCollection" )

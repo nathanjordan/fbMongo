@@ -1,0 +1,83 @@
+Top 25 artists:
+
+Lil Wayne 369.0
+Eminem 305.0
+Bob Marley 275.0
+Kid Cudi 256.0
+Wiz Khalifa 238.0
+Drake 225.0
+The Beatles 218.0
+Taylor Swift 207.0
+Bassnectar 196.0
+deadmau5 189.0
+Michael Jackson 184.0
+Lady Gaga 180.0
+Red Hot Chili Peppers 162.0
+Katy Perry 160.0
+Jack Johnson 158.0
+Skrillex 154.0
+Sublime 151.0
+Slightly Stoopid 147.0
+Atmosphere 138.0
+Pretty Lights 129.0
+Jay-Z 119.0
+MGMT 118.0
+Daft Punk 116.0
+Adele 113.0
+Jason Aldean 112.0
+
+Top 25 movies:
+
+The Hangover 330.0
+Step Brothers 143.0
+Superbad 130.0
+Fight Club 129.0
+Inception 122.0
+Harry Potter 121.0
+Buddy The Elf 117.0
+Where the Wild Things Are 95.0
+Batman: The Dark Knight 92.0
+Pineapple Express 89.0
+Avatar 86.0
+Anchorman 85.0
+The Notebook 73.0
+Finding Nemo 67.0
+Wedding Crashers 64.0
+Boondock Saints 63.0
+Toy Story 63.0
+Disney 61.0
+Pulp Fiction 59.0
+Transformers 58.0
+Star Wars 57.0
+The Lion King 56.0
+300 55.0
+Despicable Me 52.0
+The Blind Side 52.0
+
+Top 25 pages:
+
+Nevada Wolf Pack 391.0
+The Hangover 296.0
+University of Nevada, Reno 283.0
+Knitting Factory [Reno] 270.0
+Reno Aces 261.0
+Lil Wayne 260.0
+Nevada Cheerleading Team 255.0
+Family Guy 251.0
+Reno Tahoe USA 241.0
+South Park 240.0
+Megan Fox 239.0
+Visit Lake Tahoe South 218.0
+Starbucks 217.0
+Harry Potter 210.0
+Keep Tahoe Blue 209.0
+The Office 206.0
+Tosh.0 201.0
+City of Reno 197.0
+Bob Marley 195.0
+The 775 191.0
+Reno Rodeo 188.0
+Eminem 187.0
+Summer in Tahoe 187.0
+Drake 173.0
+Kid Cudi 173.0

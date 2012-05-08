@@ -7,20 +7,46 @@ Created on Apr 30, 2012
 from pymongo.code import Code
 import json
 import urllib2
+from urllib2 import HTTPError
+import time
 
 #################################################################################################################
 
 def getFacebookObject( connection, accessToken , objectID , query ):
     
-    if query != "":
-        
-        response = urllib2.urlopen("https://graph.facebook.com/" + objectID + "/" + query + "/?access_token=" + accessToken )
+    errorCount = 0
     
+    response = ""
+    
+    while errorCount < 4:
+        
+        try:
+            
+            if query != "":
+                
+                response = urllib2.urlopen("https://graph.facebook.com/" + objectID + "/" + query + "/?access_token=" + accessToken )
+            
+            else:
+                
+                response = urllib2.urlopen("https://graph.facebook.com/" + objectID + "/?access_token=" + accessToken )
+                
+            break
+        
+        except HTTPError:
+            
+            errorCount += 1
+            
+            time.sleep(0.5)
+            
+    if errorCount == 4:
+        
+        print "Error occured reading object " + objectID
+        
+        return
+        
     else:
-        
-        response = urllib2.urlopen("https://graph.facebook.com/" + objectID + "/?access_token=" + accessToken )
     
-    response = json.loads( response.read() )
+        response = json.loads( response.read() )
     
     try:
         
@@ -71,15 +97,80 @@ def getTopArtists( connection , collectionName , resultCollection ):
 
 #################################################################################################################
 
+def insertMoviesForUser( connection, accessToken , userID , collectionName ):
+    
+    movies = getFacebookObject( connection , accessToken , userID , "movies" )
+    
+    collection = connection[ collectionName ]
+    
+    for y in movies:
+        
+        collection.insert( { "movieID" : y["id"] , "movieName" : y["name"] , "userID" : userID } )
+
+#################################################################################################################
+
+def insertFriendsMovies( connection , accessToken,  userID , collectionName ):
+    
+    friends = getFacebookObject( connection , accessToken , userID , "friends" )
+    
+    for x in friends:
+        
+        insertMoviesForUser( connection , accessToken , x["id"] , collectionName )
+
+##########################################################################################
+
+def getTopMovies( connection , collectionName , resultCollection ):
+    
+    collection = connection[ collectionName ]
+    
+    #map reduce it
+    funcMap = Code("function map() {  emit( this.movieName , 1 ); }")
+    
+    funcReduce = Code("function reduce( key , values ) { var result = 0; values.forEach(function(value) {" +
+                "result += value;" +
+                "});" +
+                "return result;" +
+                "}" )
+    
+    collection.map_reduce( funcMap , funcReduce , resultCollection )
 
 
+def insertLikesForUser( connection, accessToken , userID , collectionName ):
+    
+    movies = getFacebookObject( connection , accessToken , userID , "likes" )
+    
+    collection = connection[ collectionName ]
+    
+    for y in movies:
+        
+        collection.insert( { "pageID" : y["id"] , "pageName" : y["name"] , "userID" : userID } )
 
+#################################################################################################################
 
+def insertFriendsLikes( connection , accessToken,  userID , collectionName ):
+    
+    friends = getFacebookObject( connection , accessToken , userID , "friends" )
+    
+    for x in friends:
+        
+        insertLikesForUser( connection , accessToken , x["id"] , collectionName )
 
+##########################################################################################
 
-
-
-
+def getTopLikes( connection , collectionName , resultCollection ):
+    
+    collection = connection[ collectionName ]
+    
+    #map reduce it
+    funcMap = Code("function map() {  emit( this.pageName , 1 ); }")
+    
+    funcReduce = Code("function reduce( key , values ) { var result = 0; values.forEach(function(value) {" +
+                "result += value;" +
+                "});" +
+                "return result;" +
+                "}" )
+    
+    collection.map_reduce( funcMap , funcReduce , resultCollection )
 
 
 
