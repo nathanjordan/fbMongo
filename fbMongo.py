@@ -12,7 +12,7 @@ import time
 
 #################################################################################################################
 
-def getFacebookObject( connection, accessToken , objectID , query ):
+def getFacebookObject( accessToken , objectID , query ):
     
     errorCount = 0
     
@@ -124,7 +124,7 @@ def getTopMovies( connection , collectionName , resultCollection ):
     collection = connection[ collectionName ]
     
     #map reduce it
-    funcMap = Code("function map() {  emit( this.movieName , 1 ); }")
+    funcMap = Code("function map() {  emit( this.userId + this.id , 1 ); }")
     
     funcReduce = Code("function reduce( key , values ) { var result = 0; values.forEach(function(value) {" +
                 "result += value;" +

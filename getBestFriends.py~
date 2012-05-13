@@ -38,6 +38,10 @@ userAggregateCollection.map_reduce( funcMap , funcReduce , "bestFriendsResult" )
 
 ownLikes = len(fbMongo.getFacebookObject(connection, accessToken, "me", "likes"))
 
+print ownLikes
+
+exit()
+
 for x in connection.bestFriendsResult.find().sort("value",pymongo.DESCENDING).limit(25):
     
     user = fbMongo.getFacebookObject(connection, accessToken, x["_id"], "")

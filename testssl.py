@@ -3,12 +3,14 @@ import tornado.web
 import urllib2
 import fbMongo
 import time
+import os
 from pymongo import Connection
+from tornado.httpserver import HTTPServer
 
 APPID = "362735243774306"
 APPSECRET = "9e283992e0ba5892ddf42ad548176472"
-REDIRECT_URI = "http://mrnapalm32.dyndns.org:8888/access"
-ACCESSTOKEN_URI = "http://mrnapalm32.dyndns.org:8888/token"
+REDIRECT_URI = "https://mrnapalm32.dyndns.org:9999/access"
+ACCESSTOKEN_URI = "https://mrnapalm32.dyndns.org:9999/token"
 USER_SCOPE = "user_likes,user_religion_politics,user_relationships,user_hometown,user_location,user_birthday"
 FRIEND_SCOPE = ",friends_likes,friends_religion_politics,friends_relationships,friends_hometown,friends_location,friends_birthday"
 
@@ -62,7 +64,12 @@ application = tornado.web.Application([
     (r"/token", TokenHandler),
 ])
 
+http_server = HTTPServer(application,
+    ssl_options={
+    "certfile": os.path.join("", "mrnapalm32.dyndns.org.crt"),
+    "keyfile": os.path.join("", "keynew.key"),
+    }) 
 
 if __name__ == "__main__":
-    application.listen(8888)
+    http_server.listen(9999)
     tornado.ioloop.IOLoop.instance().start()
